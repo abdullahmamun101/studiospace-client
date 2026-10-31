@@ -7,6 +7,7 @@ import {
   FaCheck,
 } from "react-icons/fa6";
 import StudioGallery from "@/components/StudioGallery";
+import BookingModal from "@/components/BookingModal";
 
 type Review = {
   name: string;
@@ -185,10 +186,15 @@ export default async function StudioDetailsPage({
               </li>
             </ul>
 
-           
-            <button type="button" className="btn btn-primary btn-lg w-full">
-              Book Workspace Now
-            </button>
+            <BookingModal
+              studio={{
+                _id: studio._id,
+                title: studio.title,
+                image: studio.image,
+                hourlyRate: studio.hourlyRate,
+                securityDeposit: studio.securityDeposit,
+              }}
+            />
 
             {/* Host details */}
             <div className="border-t border-base-300 pt-5">

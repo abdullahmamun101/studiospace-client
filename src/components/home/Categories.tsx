@@ -46,9 +46,7 @@ export default function Categories() {
     <section className="bg-base-200 py-20">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
-          <span className="badge badge-primary badge-outline mb-3 px-4 py-3 font-medium">
-            Categories
-          </span>
+    
           <h2 className="text-3xl font-bold md:text-4xl">
             Browse by Studio Category
           </h2>

@@ -20,9 +20,7 @@ export default async function FeaturedStudios() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-20">
       <div className="mb-12 text-center">
-        <span className="badge badge-primary badge-outline mb-3 px-4 py-3 font-medium">
-          Top Rated
-        </span>
+    
         <h2 className="text-3xl font-bold md:text-4xl">Featured Studios</h2>
         <p className="mx-auto mt-3 max-w-xl opacity-70">
           Hand-picked spaces that creators love to book again and again.

@@ -63,10 +63,15 @@ function MyListings() {
 
     setDeleting(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/studios/${toDelete._id}`,
-        { method: "DELETE" }
-      );
+        
+         const res = await fetch(`/api/server/studios/${toDelete._id}`, {
+        method: "DELETE",
+      });
+
+      if (res.status === 401) {
+        toast.error("Session expired. Please login again.");
+        return;
+      }
 
       if (!res.ok) {
         toast.error("Failed to delete studio");

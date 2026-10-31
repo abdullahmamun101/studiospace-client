@@ -72,11 +72,16 @@ function AddStudioForm() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studios`, {
+      const res = await fetch("/api/server/studios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(studio),
       });
+
+        if (res.status === 401) {
+        toast.error("Session expired. Please login again.");
+        return;
+      }
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);

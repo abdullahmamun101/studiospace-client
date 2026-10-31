@@ -65,7 +65,7 @@ export default function BookingModal({ studio }: Props) {
 
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
+      const res = await fetch("/api/server/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -83,6 +83,12 @@ export default function BookingModal({ studio }: Props) {
           totalPrice: total,
         }),
       });
+
+      
+      if (res.status === 401) {
+        toast.error("Session expired. Please login again.");
+        return;
+      }
 
       const data = await res.json();
 
@@ -201,7 +207,7 @@ export default function BookingModal({ studio }: Props) {
           </form>
         </div>
 
-    
+        
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>

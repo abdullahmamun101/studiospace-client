@@ -17,12 +17,13 @@ const quickLinks = [
   { href: "/about", label: "About Us" },
 ];
 
+
 const categories = [
-  "Photo Studio",
-  "Podcast Studio",
-  "Music Studio",
-  "Video Studio",
-  "Art Studio",
+  { label: "Photo Studios", value: "Photo Studio" },
+  { label: "Sound Stages", value: "Film Stage" },
+  { label: "Podcast Rooms", value: "Podcast Lounge" },
+  { label: "Music Suites", value: "Music Suite" },
+  { label: "Art Workshops", value: "Workshop" },
 ];
 
 const socials = [
@@ -89,12 +90,12 @@ export default function Footer() {
           <h3 className="mb-4 text-lg font-semibold">Popular Categories</h3>
           <ul className="space-y-2 text-sm">
             {categories.map((cat) => (
-              <li key={cat}>
+              <li key={cat.value}>
                 <Link
-                  href={`/studios?category=${encodeURIComponent(cat)}`}
+                  href={`/studios?category=${encodeURIComponent(cat.value)}`}
                   className="hover:text-primary"
                 >
-                  {cat}
+                  {cat.label}
                 </Link>
               </li>
             ))}

@@ -10,7 +10,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  // ?redirect=/some-page thakle login er por oikhane jabe, na hole Home e
+
   const getRedirectPath = () => {
     const params = new URLSearchParams(window.location.search);
     return params.get("redirect") || "/";
@@ -39,10 +39,15 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    await authClient.signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: getRedirectPath(),
     });
+
+    if (error) {
+        console.log("GOOGLE ERROR:", error);
+      toast.error(error.message || "Google login failed");
+    }
   };
 
   return (

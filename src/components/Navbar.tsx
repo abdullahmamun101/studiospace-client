@@ -47,6 +47,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     closeMenu();
+    await fetch("/api/jwt", { method: "DELETE" });
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {

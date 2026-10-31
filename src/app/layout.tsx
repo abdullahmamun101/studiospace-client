@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
+import JwtSync from "@/components/JwtSync";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} flex min-h-screen flex-col antialiased`}
       >
+        <JwtSync />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

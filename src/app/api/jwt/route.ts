@@ -31,6 +31,12 @@ export async function POST() {
 
 export async function DELETE() {
   const res = NextResponse.json({ ok: true });
-  res.cookies.set("token", "", { httpOnly: true, path: "/", maxAge: 0 });
+  res.cookies.set("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
   return res;
 }

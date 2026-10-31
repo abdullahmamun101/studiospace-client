@@ -1,10 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { TbAperture } from "react-icons/tb";
 import { authClient } from "@/lib/auth-client";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -20,16 +22,31 @@ const userLinks = [
   { href: "/my-bookings", label: "My Bookings" },
 ];
 
+
+const closeMenu = () => {
+  (document.activeElement as HTMLElement | null)?.blur();
+};
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const handleLogout = async () => {
+    closeMenu();
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
@@ -42,12 +59,23 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/90 backdrop-blur">
-      <div className="navbar mx-auto max-w-7xl px-4">
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur-md transition-all duration-300 ${
+        scrolled
+          ? "border-base-300 bg-base-100/90 shadow-sm"
+          : "border-transparent bg-base-100/60"
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-4 md:h-20">
         {/* Left: mobile menu + logo */}
-        <div className="navbar-start">
+        <div className="flex items-center gap-1">
           <div className="dropdown lg:hidden">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-square">
+            <div
+              tabIndex={0}
+              role="button"
+              aria-label="Open menu"
+              className="btn btn-ghost btn-square"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -65,18 +93,28 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu dropdown-content z-10 mt-3 w-56 rounded-box bg-base-100 p-2 shadow"
+              className="menu dropdown-content z-10 mt-3 w-60 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg"
             >
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={isActive(link.href) ? "text-primary font-semibold" : ""}
+                    onClick={closeMenu}
+                    className={
+                      isActive(link.href) ? "font-semibold text-primary" : ""
+                    }
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
+              {!isPending && !user && (
+                <li className="mt-1 border-t border-base-300 pt-1">
+                  <Link href="/login" onClick={closeMenu}>
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -89,46 +127,65 @@ export default function Navbar() {
         </div>
 
         {/* Center: desktop links */}
-        <div className="navbar-center hidden lg:flex">
+        <nav className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`px-4 py-2 text-sm font-medium transition border-b-2 ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
                     isActive(link.href)
-                      ? "border-primary text-primary"
-                      : "border-transparent hover:text-primary"
+                      ? "text-primary"
+                      : "hover:text-primary"
                   }`}
                 >
                   {link.label}
+                  <span
+                    className={`absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
+                      isActive(link.href) ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
-        {/* Right: auth area */}
-        <div className="navbar-end gap-2">
+        {/* Right: theme toggle + auth area */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          <ThemeToggle />
+
           {isPending ? (
             <span className="loading loading-spinner loading-sm" />
           ) : user ? (
             <div className="dropdown dropdown-end dropdown-hover">
-              <div tabIndex={0} role="button" className="avatar cursor-pointer">
-                <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={user.image || "https://i.ibb.co/2kR7xwL/avatar.png"}
-                    alt={user.name}
-                  />
+              <div
+                tabIndex={0}
+                role="button"
+                aria-label="Open profile menu"
+                className="cursor-pointer"
+              >
+                <div className="h-10 w-10 overflow-hidden rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+                  {user.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={user.image}
+                      alt={user.name}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center bg-primary font-semibold text-primary-content">
+                      {user.name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content z-10 w-60 rounded-box bg-base-100 p-2 shadow-lg"
+                className="menu dropdown-content z-10 w-64 rounded-box border border-base-300 bg-base-100 p-2 shadow-xl"
               >
                 <li className="menu-title px-4 py-2">
-                  <span className="block text-base-content font-semibold">
+                  <span className="block font-semibold text-base-content">
                     {user.name}
                   </span>
                   <span className="block text-xs font-normal opacity-70">
@@ -137,10 +194,12 @@ export default function Navbar() {
                 </li>
                 {userLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href}>{link.label}</Link>
+                    <Link href={link.href} onClick={closeMenu}>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
-                <li>
+                <li className="mt-1 border-t border-base-300 pt-1">
                   <button onClick={handleLogout} className="text-error">
                     Logout
                   </button>
@@ -149,7 +208,10 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link href="/login" className="btn btn-ghost btn-sm">
+              <Link
+                href="/login"
+                className="btn btn-ghost btn-sm hidden sm:inline-flex"
+              >
                 Login
               </Link>
               <Link href="/register" className="btn btn-primary btn-sm">

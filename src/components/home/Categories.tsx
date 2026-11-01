@@ -156,9 +156,7 @@ export default function Categories() {
 
       <div className="mx-auto max-w-[1500px] px-4">
         <div className="mb-14 text-center">
-          <span className="badge badge-primary badge-outline mb-3 px-4 py-3 font-medium">
-            Categories
-          </span>
+          
           <h2 className="text-3xl font-bold md:text-5xl">
             Browse by Studio Category
           </h2>

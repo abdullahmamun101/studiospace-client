@@ -9,19 +9,22 @@ export const metadata: Metadata = {
 
 const hostSteps = [
   {
-    number: "1",
+    number: "01",
     title: "List your space",
     text: "Add your studio with photos, amenities, hourly rate and security deposit.",
+    rotation: "md:-rotate-6 md:translate-y-8",
   },
   {
-    number: "2",
+    number: "02",
     title: "Receive booking requests",
     text: "Creators pick a date and time, and each request reaches you as a pending booking.",
+    rotation: "md:rotate-0 md:-translate-y-4",
   },
   {
-    number: "3",
+    number: "03",
     title: "Manage your listings",
     text: "Update details or remove a listing any time from your My Studio Listings page.",
+    rotation: "md:rotate-6 md:translate-y-8",
   },
 ];
 
@@ -53,7 +56,6 @@ export default function HowItWorksPage() {
     <>
       {/* Page heading */}
       <section className="mx-auto max-w-7xl px-4 pt-16 text-center">
-        
         <h1 className="text-3xl font-bold md:text-5xl">How StudioSpace Works</h1>
         <p className="mx-auto mt-4 max-w-2xl opacity-70">
           Whether you are looking for a space to create in or a space to share,
@@ -61,36 +63,58 @@ export default function HowItWorksPage() {
         </p>
       </section>
 
-      
       <HowItWorks />
 
       {/* Host steps */}
-      <section className="bg-base-200 py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-12 text-center">
-           
-            <h2 className="text-3xl font-bold md:text-4xl">
+      <section className="relative overflow-hidden bg-base-200 py-32">
+        <div className="mx-auto max-w-7xl px-4 relative">
+          
+          <div className="mb-20 text-center">
+            
+            <h2 className="text-3xl font-bold md:text-5xl">
               Share Your Space in 3 Steps
             </h2>
+            <p className="mt-3 text-sm opacity-70 max-w-md mx-auto">
+              Turn your unused creative space into steady income with full host protection.
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          {/* Curved Dotted Connecting Line (Desktop Background SVG) */}
+          <div className="pointer-events-none absolute inset-x-0 top-[60%] hidden md:block -translate-y-1/2 z-0 px-12">
+            <svg className="w-full h-28 text-primary/40" viewBox="0 0 1000 150" fill="none">
+              <path
+                d="M 50 120 Q 500 -40 950 120"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeDasharray="8 8"
+                fill="none"
+              />
+            </svg>
+          </div>
+
+          <div className="relative grid gap-10 md:grid-cols-3 md:gap-8 pt-6 z-10">
             {hostSteps.map((step) => (
               <div
                 key={step.number}
-                className="flex h-full flex-col rounded-2xl border border-base-300 bg-base-100 p-7 transition duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-xl"
+                className={`relative flex flex-col justify-between rounded-3xl border border-white/20 bg-base-100/70 backdrop-blur-md p-8 shadow-2xl transition-all duration-300 hover:scale-[1.04] hover:shadow-3xl ${step.rotation}`}
               >
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-content">
-                  {step.number}
-                </span>
-                <h3 className="text-xl font-semibold">{step.title}</h3>
-                <p className="mt-3 text-sm opacity-70">{step.text}</p>
+                <div>
+                  {/* Top Step Number */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-base font-bold text-primary shadow-sm">
+                      {step.number}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold tracking-tight">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed opacity-70">{step.text}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
-            <Link href="/add-studio" className="btn btn-primary btn-lg">
+          <div className="mt-24 text-center z-10 relative">
+            <Link href="/add-studio" className="btn btn-primary btn-lg shadow-xl px-8">
               Add New Studio
             </Link>
           </div>

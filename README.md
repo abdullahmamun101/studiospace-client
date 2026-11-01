@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#Project name: StudioSpace
 
-## Getting Started
+#Live Website: https://studiospace-omega.vercel.app/
 
-First, run the development server:
+#About the Project: StudioSpace is a peer-to-peer creative workspace and production studio booking platform. It connects creators with studio owners, making it easy to discover, explore, and book creative spaces for photography, videography, podcasting, music production, and other creative projects.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#Features:
+1.Studio Discovery: Explore creative studios across different categories.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.Featured Studios: Discover popular and highly rated studio spaces.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3.Search and Filtering: Find studios based on category, location, and other preferences.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4.User Authentication: Register and log in using email and password with Better Auth.
 
-## Learn More
+5.Google Authentication: Sign in using a Google account.
 
-To learn more about Next.js, take a look at the following resources:
+6.Studio Management: Add, update, and delete personal studio listings.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+7.Studio Details: View studio information, pricing, amenities, ratings, and host details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+8.Workspace Booking: Book available studios and manage booking requests.
 
-## Deploy on Vercel
+9.My Bookings: View booking history and check booking statuses.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+10.Booking Cancellation: Cancel eligible pending bookings.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+11.Responsive Design: Optimized for desktop, tablet, and mobile devices.
+
+12.Dark and Light Theme: Switch between different visual themes.
+
+#Technology Stack:
+
+Frontend
+
+Next.js
+React
+TypeScript
+Tailwind CSS
+DaisyUI
+React Icons
+React Hot Toast
+
+Backend
+
+Node.js
+Express.js
+MongoDB
+JWT Authentication
+
+Authentication
+
+Better Auth
+Google OAuth
+
+Tools & Deployment
+
+Vercel (Frontend)
+Render (Backend)
+MongoDB Atlas (Database)
+
+
+
+
+

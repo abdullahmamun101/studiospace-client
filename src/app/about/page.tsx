@@ -120,9 +120,7 @@ export default function AboutPage() {
       {/* Values - Pin Note Style Design */}
       <section className="relative mx-auto max-w-5xl px-6 py-28 overflow-hidden">
         <div className="mb-16 text-center">
-          <span className="badge badge-primary badge-outline mb-3 px-4 py-3 font-medium">
-            Our Core Values
-          </span>
+         
           <h2 className="text-3xl font-bold md:text-5xl">What We Stand For</h2>
         </div>
 

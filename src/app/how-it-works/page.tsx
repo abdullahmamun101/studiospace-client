@@ -121,29 +121,50 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-4 py-20">
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="space-y-3">
-          {faqs.map((item, i) => (
-            <div
-              key={item.q}
-              className="collapse collapse-arrow rounded-2xl border border-base-300 bg-base-100"
-            >
-              <input type="radio" name="faq" defaultChecked={i === 0} />
-              <div className="collapse-title text-lg font-semibold">
-                {item.q}
-              </div>
-              <div className="collapse-content text-sm opacity-80">
-                <p>{item.a}</p>
-              </div>
+      {/* FAQ (Redesigned matching reference split layout) */}
+      <section className="mx-auto max-w-7xl px-4 py-28">
+        <div className="grid gap-12 lg:grid-cols-12 items-start">
+          {/* Left Column: Heading & "Still have questions?" Card */}
+          <div className="lg:col-span-5 space-y-8">
+            <div>
+             
+              <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl leading-tight">
+                Frequently asked questions
+              </h2>
             </div>
-          ))}
+
+            {/* Still have questions Card */}
+            <div className="rounded-3xl border border-base-300 bg-base-200/50 backdrop-blur-xl p-8 shadow-2xl">
+              <h3 className="text-xl font-bold mb-3">Still have a question?</h3>
+              <p className="text-sm opacity-75 mb-6 leading-relaxed">
+                Can&apos;t find the answer to your question? Send us an email and we&apos;ll get back to you as soon as possible!
+              </p>
+              <Link
+                href="mailto:support@studiospace.com"
+                className="btn btn-primary shadow-lg rounded-2xl px-6"
+              >
+                Send email
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: FAQ Accordion List */}
+          <div className="lg:col-span-7 space-y-4">
+            {faqs.map((item, i) => (
+              <div
+                key={item.q}
+                className="collapse collapse-arrow rounded-2xl border border-base-300 bg-base-100 shadow-xl transition-all duration-300 hover:border-primary/50"
+              >
+                <input type="radio" name="faq" defaultChecked={i === 0} />
+                <div className="collapse-title text-lg font-semibold pr-12">
+                  {item.q}
+                </div>
+                <div className="collapse-content text-sm opacity-80 leading-relaxed">
+                  <p>{item.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

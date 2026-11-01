@@ -14,16 +14,16 @@ export default function StudioGallery({
   title: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-base-300">
+    <div className="w-full min-w-0 overflow-hidden rounded-2xl border border-base-300 bg-base-200">
       <Swiper
         modules={[Navigation, Pagination]}
         navigation
         pagination={{ clickable: true }}
-        className="h-72 w-full md:h-[26rem]"
+        className="aspect-[4/3] w-full sm:aspect-[16/9]"
         style={
           {
             "--swiper-theme-color": "var(--color-primary)",
-            "--swiper-navigation-size": "28px",
+            "--swiper-navigation-size": "24px",
           } as React.CSSProperties
         }
       >
@@ -33,7 +33,7 @@ export default function StudioGallery({
             <img
               src={src}
               alt={`${title} photo ${i + 1}`}
-              className="h-full w-full object-cover"
+              className="block h-full w-full object-cover"
             />
           </SwiperSlide>
         ))}

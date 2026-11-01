@@ -94,9 +94,9 @@ export default async function StudioDetailsPage({
         </div>
       </div>
 
-      <div className="grid gap-10 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
         {/* Left column */}
-        <div className="space-y-10 lg:col-span-2">
+        <div className="min-w-0 space-y-10 lg:col-span-2">
           <StudioGallery images={images} title={studio.title} />
 
           {/* Overview */}
@@ -162,7 +162,7 @@ export default async function StudioDetailsPage({
         </div>
 
         {/* Right column: booking card */}
-        <aside className="lg:col-span-1">
+            <aside className="min-w-0 lg:col-span-1">
           <div className="sticky top-24 space-y-5 rounded-2xl border border-base-300 bg-base-100 p-6 shadow-lg">
             <p className="text-3xl font-bold text-primary">
               ${studio.hourlyRate}
